@@ -1,4 +1,5 @@
-#!/usr/bin/env python
+#! /usr/bin/env python
+
 
 from __future__ import print_function
 import sys,os
@@ -226,13 +227,19 @@ if(int(n[4])==1):
 if(int(n[5])==1):
     open('clang-check-warnings.txt', 'w').close()
 
-    checkfile=open("clang-check-warnings.txt","r+") 
+    checkfile=open("clang-check-warnings.txt","w+") 
     #checkfile1=open("clang-check-warnings1.txt","w") 
     #print("case6:")
     a=sh2("clang-check -analyze "+sys.argv[1]+" -- -DF00")
+ #   print(a)
     if(a!=""):
+        #print(a)
         checkfile.write(a)
+       
+    
+    checkfile.seek(0, 0)
     for line in checkfile:
+        #print(line)
         line.rstrip("\n")
         if(line.find(':')!=-1):
             line=line.split(":",1)    
@@ -263,5 +270,5 @@ for line in target:
         flag1=1
     else:    
         print(line,end="")
-
+        #print(os.getcwd())
                
